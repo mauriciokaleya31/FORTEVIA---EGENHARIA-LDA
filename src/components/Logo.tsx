@@ -17,12 +17,15 @@ export const Logo: React.FC<LogoProps> = ({ className = '', variant = 'dark', sh
     <div className={`flex items-center gap-2.5 select-none ${className}`}>
       {!imgError ? (
         <div className="flex items-center gap-2.5">
-          <img
-            src={logoUrl}
-            alt="Fortevia Engenharia Logo"
-            onError={() => setImgError(true)}
-            className="h-9 sm:h-11 md:h-12 w-auto object-contain max-w-[220px] transition-transform duration-300 group-hover:scale-105"
-          />
+          {/* High-visibility card container for crisp logo contrast */}
+          <div className="bg-white/95 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl shadow-md border border-slate-200/80 inline-flex items-center justify-center transition-transform group-hover:scale-105">
+            <img
+              src={logoUrl}
+              alt="Fortevia Engenharia Logo"
+              onError={() => setImgError(true)}
+              className="h-7 sm:h-9 md:h-10 w-auto object-contain max-w-[180px] sm:max-w-[220px]"
+            />
+          </div>
           {showTagline && (
             <div className="hidden md:flex flex-col border-l border-slate-700/50 pl-3 leading-tight">
               <span className={`font-heading font-extrabold text-xs uppercase tracking-wider ${textColor}`}>
