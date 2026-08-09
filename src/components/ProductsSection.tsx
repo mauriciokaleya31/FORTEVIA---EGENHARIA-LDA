@@ -4,7 +4,8 @@ import { ProductItem } from '../types';
 import { 
   Wrench, Sliders, Settings, Activity, Layers, Zap, Shield, Cpu, 
   Droplet, ShieldAlert, Anchor, AlertTriangle, Package, Lock, 
-  Search, Plus, CheckCircle, Tag, ShoppingBag 
+  Search, CheckCircle, Tag, ShoppingBag, Eye, X, Mail, Phone, ExternalLink,
+  Info, Sparkles, Filter, Check
 } from 'lucide-react';
 
 interface ProductsSectionProps {
@@ -18,6 +19,8 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [activeProductModal, setActiveProductModal] = useState<ProductItem | null>(null);
+  const [cartItems, setCartItems] = useState<string[]>([]);
 
   const categories = [
     { id: 'all', label: 'Todos os Produtos' },
@@ -38,6 +41,21 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
       (p.brand && p.brand.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
+
+  const toggleCartItem = (productName: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (cartItems.includes(productName)) {
+      setCartItems(cartItems.filter(item => item !== productName));
+    } else {
+      setCartItems([...cartItems, productName]);
+    }
+  };
+
+  const handleBatchQuote = () => {
+    if (cartItems.length === 0) return;
+    const combinedNames = `Cotação Múltipla (${cartItems.length} itens): ` + cartItems.join(', ');
+    onOpenQuoteModal(combinedNames);
+  };
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
@@ -60,35 +78,37 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white text-slate-800" id="products-section">
+    <section className="py-16 md:py-24 bg-slate-50 text-slate-800" id="products-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <h2 className="font-heading font-extrabold text-3xl sm:text-5xl text-[#081B4B]">
-            Produtos e Equipamentos Industriais
-          </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Disponibilizamos uma ampla gama de equipamentos, ferramentas, componentes e soluções industriais através de parceiros e fabricantes nacionais e internacionais.
-          </p>
-        </div>
+
 
         {/* Filter Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 bg-slate-50 p-3.5 sm:p-4 rounded-2xl border border-slate-200">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200 shadow-sm">
           {/* Search Bar */}
           <div className="relative w-full md:w-80">
             <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
             <input
               type="text"
-              placeholder="Procurar produto ou marca (ex: Enerpac, Válvula)..."
+              placeholder="Procurar por nome, marca ou categoria..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-[#BB7636] focus:ring-1 focus:ring-[#BB7636]"
             />
           </div>
 
-          {/* Category Tabs with smooth touch scroll on mobile */}
-          <div className="flex items-center gap-1.5 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          {/* Category Tabs & Cart Button */}
+          <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+            {cartItems.length > 0 && (
+              <button
+                onClick={handleBatchQuote}
+                className="bg-[#BB7636] hover:bg-[#a5652a] text-white px-4 py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-md flex-shrink-0"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                <span>Cotação ({cartItems.length})</span>
+              </button>
+            )}
+
             {categories.map((cat) => (
               <button
                 key={cat.id}
@@ -96,7 +116,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                 className={`px-3.5 py-2.5 rounded-xl font-heading text-xs font-semibold whitespace-nowrap transition-all flex-shrink-0 ${
                   selectedCategory === cat.id
                     ? 'bg-[#081B4B] text-white shadow'
-                    : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
                 }`}
               >
                 {cat.label}
@@ -109,57 +129,101 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {filteredProducts.map((product) => {
             const IconComp = getIcon(product.iconName);
+            const isInCart = cartItems.includes(product.name);
+
             return (
               <div
                 key={product.id}
-                className="bg-slate-50 rounded-2xl border border-slate-200 hover:border-[#BB7636] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
+                onClick={() => setActiveProductModal(product)}
+                className="bg-white rounded-2xl border border-slate-200 hover:border-[#BB7636] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1 cursor-pointer relative"
               >
-                {/* Product Image */}
-                <div className="relative h-44 overflow-hidden bg-slate-900">
+                {/* Product Image Container */}
+                <div className="relative h-48 overflow-hidden bg-slate-900 group">
                   <img
                     src={product.image}
                     alt={product.name}
                     onError={(e) => {
                       e.currentTarget.src = 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
                     }}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#081B4B]/80 via-transparent to-transparent" />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#081B4B]/90 via-black/20 to-transparent" />
 
-                  {/* Brand Tag */}
-                  {product.brand && (
-                    <span className="absolute top-3 left-3 bg-[#081B4B] text-[#BB7636] border border-[#BB7636]/40 text-[10px] font-heading font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-md">
-                      {product.brand}
+                  {/* Top Badges */}
+                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                    {product.brand ? (
+                      <span className="bg-[#081B4B] text-[#BB7636] border border-[#BB7636]/40 text-[10px] font-heading font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-md">
+                        {product.brand}
+                      </span>
+                    ) : <span />}
+                  </div>
+
+                  {/* Quick view button overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-[2px]">
+                    <span className="bg-white/90 hover:bg-white text-[#081B4B] font-heading font-bold text-xs px-3.5 py-2 rounded-lg flex items-center gap-1.5 shadow-lg">
+                      <Eye className="w-3.5 h-3.5 text-[#BB7636]" />
+                      <span>Ver Detalhes</span>
                     </span>
-                  )}
+                  </div>
 
-                  <div className="absolute top-3 right-3 bg-white/90 text-[#081B4B] p-1.5 rounded-lg">
-                    <IconComp className="w-4 h-4" />
+                  <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white text-[11px] font-heading">
+                    <span className="text-amber-300 font-semibold flex items-center gap-1">
+                      <CheckCircle className="w-3 h-3 text-emerald-400" />
+                      <span>Sob Cotação</span>
+                    </span>
+                    <span className="text-slate-200 text-[10px]">
+                      ISO / API Certified
+                    </span>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
                   <div>
                     <span className="text-[10px] font-heading font-semibold uppercase text-slate-400 tracking-wider">
                       {product.category}
                     </span>
-                    <h3 className="font-heading font-bold text-base text-[#081B4B] leading-tight mt-0.5">
+                    <h3 className="font-heading font-bold text-base text-[#081B4B] leading-tight mt-0.5 group-hover:text-[#BB7636] transition-colors">
                       {product.name}
                     </h3>
-                    <p className="text-slate-600 text-xs mt-2 leading-relaxed line-clamp-3">
+                    <p className="text-slate-600 text-xs mt-2 leading-relaxed line-clamp-2">
                       {product.description}
                     </p>
                   </div>
 
-                  {/* Quote CTA Button */}
-                  <div className="pt-3 border-t border-slate-200">
+                  {/* Actions Bar */}
+                  <div className="pt-3 border-t border-slate-100 space-y-2">
                     <button
-                      onClick={() => onOpenQuoteModal(product.name)}
-                      className="w-full bg-[#BB7636] hover:bg-[#a5652a] text-white py-2.5 px-3 rounded-lg font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenQuoteModal(product.name);
+                      }}
+                      className="w-full bg-[#BB7636] hover:bg-[#a5652a] text-white py-2.5 px-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95"
                     >
                       <Tag className="w-3.5 h-3.5" />
                       <span>Solicitar Cotação</span>
+                    </button>
+
+                    <button
+                      onClick={(e) => toggleCartItem(product.name, e)}
+                      className={`w-full py-1.5 px-3 rounded-lg text-[11px] font-heading font-semibold transition-all flex items-center justify-center gap-1.5 border ${
+                        isInCart 
+                          ? 'bg-emerald-50 border-emerald-300 text-emerald-700' 
+                          : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-600'
+                      }`}
+                    >
+                      {isInCart ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>Adicionado à Lista de Cotação</span>
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingBag className="w-3.5 h-3.5 text-slate-400" />
+                          <span>+ Adicionar à Lista</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -169,20 +233,135 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
         </div>
 
         {/* Custom Sourcing Callout */}
-        <div className="mt-12 p-8 rounded-2xl bg-slate-900 text-white border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="space-y-1">
-            <h4 className="font-heading font-bold text-lg text-white">Não encontrou o equipamento específico que procura?</h4>
-            <p className="text-xs text-slate-300">Nossa equipa de Procurement Internacional localiza e importa qualquer item sob norma ISO/API/ASME com certificação OEM.</p>
+        <div className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-[#081B4B] to-slate-900 text-white border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+          <div className="space-y-1 max-w-xl">
+            <h4 className="font-heading font-bold text-xl text-white flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[#BB7636]" />
+              <span>Não encontrou o equipamento específico que procura?</span>
+            </h4>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              A nossa equipa de Procurement Internacional localiza, importa e entrega qualquer equipamento para a indústria petrolífera e marítima sob norma ISO/API/ASME com certificação do fabricante.
+            </p>
           </div>
           <button
             onClick={onOpenContactModal}
-            className="bg-white text-[#081B4B] hover:bg-slate-100 font-heading font-bold px-6 py-3 rounded-lg text-xs whitespace-nowrap shadow-md"
+            className="bg-[#BB7636] text-white hover:bg-[#a5652a] font-heading font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider whitespace-nowrap shadow-lg transition-transform active:scale-95"
           >
             Consultar Equipa de Procurement
           </button>
         </div>
 
       </div>
+
+      {/* Product Quick View Modal */}
+      {activeProductModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-slate-200 overflow-hidden relative text-slate-800">
+            
+            {/* Modal Header */}
+            <div className="bg-[#081B4B] text-white p-4 sm:p-5 flex items-center justify-between sticky top-0 z-10 border-b border-slate-800">
+              <div className="flex items-center gap-2">
+                <span className="bg-[#BB7636] text-white text-[10px] font-heading font-extrabold uppercase px-2.5 py-1 rounded">
+                  {activeProductModal.brand || 'Fortevia Supplier'}
+                </span>
+                <span className="text-xs text-slate-300 font-heading">
+                  {activeProductModal.category}
+                </span>
+              </div>
+              <button
+                onClick={() => setActiveProductModal(null)}
+                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-5 sm:p-6 space-y-5">
+              {/* Image Preview */}
+              <div className="relative h-64 sm:h-72 rounded-xl overflow-hidden bg-slate-900 border border-slate-200">
+                <img
+                  src={activeProductModal.image}
+                  alt={activeProductModal.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                  <CheckCircle className="w-4 h-4 text-emerald-400" />
+                  <span>Garantia de Qualidade & Certificação</span>
+                </div>
+              </div>
+
+              {/* Text Info */}
+              <div>
+                <h3 className="font-heading font-extrabold text-2xl text-[#081B4B]">
+                  {activeProductModal.name}
+                </h3>
+                <p className="text-slate-600 text-sm mt-3 leading-relaxed">
+                  {activeProductModal.description}
+                </p>
+              </div>
+
+              {/* Technical Specifications list */}
+              <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-xs">
+                <p className="font-heading font-bold text-[#081B4B] uppercase tracking-wider">
+                  Especificações & Garantia
+                </p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-[#BB7636]" />
+                    <span>Fabricante: <strong>{activeProductModal.brand || 'OEM Internacional'}</strong></span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-[#BB7636]" />
+                    <span>Certificação: <strong>ISO / API / SOLAS</strong></span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-[#BB7636]" />
+                    <span>Disponibilidade: <strong>Pronta Entrega / Encomenda</strong></span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-[#BB7636]" />
+                    <span>Entrega: <strong>Soyo, Luanda, Cabinda & Offshore</strong></span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Direct email callout */}
+              <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-between gap-3 text-xs text-amber-900">
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-[#BB7636]" />
+                  <span>Todas as solicitações enviadas directamente para: <strong>geral@forteviaengenharia.com</strong></span>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
+                <button
+                  onClick={() => {
+                    const prodName = activeProductModal.name;
+                    setActiveProductModal(null);
+                    onOpenQuoteModal(prodName);
+                  }}
+                  className="w-full bg-[#BB7636] hover:bg-[#a5652a] text-white py-3.5 px-6 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <Tag className="w-4 h-4" />
+                  <span>Solicitar Cotação por E-mail</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveProductModal(null)}
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                >
+                  Fechar
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      )}
     </section>
   );
 };
+

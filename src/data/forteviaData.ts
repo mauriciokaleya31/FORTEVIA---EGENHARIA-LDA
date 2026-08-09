@@ -224,7 +224,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Cilindros hidráulicos, bombas, chaves dinamométricas, cortadores e macacos de alta capacidade ENERPAC.',
     brand: 'ENERPAC',
     iconName: 'Wrench',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJIw6_plN_KrpFwuuPD2_X8ircsz4tEM7_oDiQotS2WQ&s=10',
     isFeatured: true
   },
   {
@@ -234,7 +234,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Separadores de flanges, tensores de parafusos, tirantes e bombas portáteis Hi-Force.',
     brand: 'Hi-Force',
     iconName: 'Tool',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBzFuF98dCEC7wCp183FU1HR6urImWPVXs_04CuYeIgw&s=10',
     isFeatured: true
   },
   {
@@ -244,7 +244,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Válvulas de Esfera, Gaveta, Retenção, Borboleta, Agulha e Alívio para altas pressões e temperaturas.',
     brand: 'OEM Multimarcas',
     iconName: 'Settings',
-    image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9_8y84Yf557RPNLq85Q2EbHPzI0oUFYyT7SAlUP7PwQ&s=10',
     isFeatured: true
   },
   {
@@ -254,7 +254,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Mangueiras espiraladas de altíssima pressão (10.000+ PSI), conexões inoxidáveis, acoplamentos rápidos e terminais.',
     brand: 'Parker / Gates',
     iconName: 'Activity',
-    image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRayekzUZGFKT7n9arE7K64V17014pGL8ae6e0_Npm2_w&s=10',
     isFeatured: true
   },
   {
@@ -264,7 +264,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Tubos sem costura ASTM, flanges ANSI/API, acoplamentos mecânicos, curvas e conexões forjadas.',
     brand: 'ASTM / API Certified',
     iconName: 'Layers',
-    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX-tHBCuaPRCd-PcFlc3ALU3NYeK7E2y4lpAPXbU_4Hg&s=10'
   },
   {
     id: 'pumps-compressors',
@@ -273,7 +273,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Bombas centrífugas, bombas de diafragma, compressores de ar para poços e sistemas de elevação.',
     brand: 'OEM International',
     iconName: 'Zap',
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWCkv_tS3OIJgM-W_k8gKGAWh9OHWcotm2XzpyvMv_aA&s=10'
   },
   {
     id: 'pipe-insulation-gaskets',
@@ -282,7 +282,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Juntas espirotálicas RTJ, juntas de estanqueidade, mantas térmicas e kits de isolamento dieléctrico de flanges.',
     brand: 'Flexitallic / Lamons',
     iconName: 'Shield',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYsRy6TdgZ_bkYgoEyBk7yATqOpnHfhsVMVmpXJAFWLA&s=10'
   },
   {
     id: 'instrumentation-field',
@@ -291,7 +291,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Manómetros digitais/analógicos calibrados, transmissores de pressão, caudalímetros e termopar.',
     brand: 'WIKA / Rosemount',
     iconName: 'Cpu',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyUP83rIqK2ABq835uLZxvgSDuF2aAfIEWiM92oUM0BQ&s=10'
   },
   {
     id: 'transfer-filtration-units',
@@ -300,7 +300,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Unidades móveis de filtragem e transferência de fluidos com filtros coalescentes e separadores de água.',
     brand: 'Pall / Parker',
     iconName: 'Droplet',
-    image: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ4Nb5p3niQa2Xo1FVr_zp6MQgVnfgpOHc-lKYzSqIpg&s=10'
   },
   {
     id: 'electric-motors-ind',
@@ -309,7 +309,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Motores de indução trifásicos, motores à prova de explosão (Ex-d) para áreas classificadas Oil & Gas.',
     brand: 'WEG / ABB',
     iconName: 'Zap',
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMjPKtd9pa1KKWBvmnZrMK33nIFPyCJ9JJ3v_jeAAqHA&s=10'
   },
   {
     id: 'pressure-testing-equip',
@@ -318,7 +318,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Registadores de gráficos de pressão (chart recorders), bombas de teste hidroestático e coletores de alta pressão.',
     brand: 'Barton / Haskel',
     iconName: 'Activity',
-    image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN_7NOMhRlhyoAeVZRdJlMw6aibIdiC08nzJAmJtWNgQ&s=10'
   },
   {
     id: 'spill-kits',
@@ -327,7 +327,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Kits de emergência para contenção e absorção de derrames de hidrocarbonetos e produtos químicos em terra e mar.',
     brand: 'New Pig / Brady',
     iconName: 'ShieldAlert',
-    image: 'https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhJawmnfS10vB6GlaEsrWVhNocMDyEQyWaWc9nSNUODg&s=10'
   },
   {
     id: 'marine-lubricants-paint',
@@ -336,7 +336,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Lubrificantes marítimos aprovados para motores marítimos, tinta anticorrosiva de alto desempenho Jotun/Hempel.',
     brand: 'Jotun / Hempel / Shell',
     iconName: 'Anchor',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgYo4HtAgnijf714W5nGKpTWPtS5fdD6-np2Gpb8eFjw&s=10'
   },
   {
     id: 'comet-pyrotechnics',
@@ -345,7 +345,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Sinais pirotécnicos de emergência marítima (Foguetes para-quedas, fachos de mão, bóias fumígenas) aprovados SOLAS.',
     brand: 'Comet Marine',
     iconName: 'AlertTriangle',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj8yJP6iB_S3XLur_ORRb0llu7JyPBNKYnEpznuRRk3g&s=10'
   },
   {
     id: 'cranes-lifting-equip',
@@ -354,7 +354,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Diferenciais de corrente, manilhas de alta resistência, cintas sintéticas, cabos de aço e ganchos com travas.',
     brand: 'Crosby / Gunnebo',
     iconName: 'Package',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaZ5QzjVDCgPjU3zcS8kqkVz4Wp1bmkL-Tc6R-yXZ15A&s=10'
   },
   {
     id: 'automation-loto-tools',
@@ -363,7 +363,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Sistemas de bloqueio mecânico, eléctrico e hidráulico LOTO, conjuntos de chaves antichispa (Berclean) e ferramentas manuais.',
     brand: 'Brady / Master Lock',
     iconName: 'Lock',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80'
+    image: 'https://m.media-amazon.com/images/I/81MTC94K-WL.jpg'
   }
 ];
 

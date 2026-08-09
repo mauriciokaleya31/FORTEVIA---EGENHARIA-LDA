@@ -63,18 +63,9 @@ export default function App() {
               onOpenQuoteModal={handleOpenQuoteModal}
               onOpenContactModal={handleOpenContactModal}
             />
-            <TrainingSection
-              onOpenContactModal={handleOpenContactModal}
-              onOpenCourseInquiry={(course) => setActiveCourseInquiry(course)}
-            />
             <WhyChooseUs />
             <PartnershipCTA onOpenContactModal={handleOpenContactModal} />
             <ProjectsShowcase onOpenContactModal={handleOpenContactModal} />
-            <CallToAction
-              onOpenQuoteModal={() => handleOpenQuoteModal()}
-              onOpenContactModal={handleOpenContactModal}
-            />
-            <ContactSection />
           </>
         )}
 
