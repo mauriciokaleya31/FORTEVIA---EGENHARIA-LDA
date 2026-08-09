@@ -1,0 +1,6 @@
+{
+  "name": "Fortevia Engenharia",
+  "description": "Website Institucional da Fortevia Engenharia - Soluções em Engenharia, Procurement, Logística e Formação Profissional em Angola.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
