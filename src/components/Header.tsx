@@ -121,16 +121,6 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Right Controls & CTAs */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Quote Request Button */}
-            <button
-              onClick={() => onOpenQuoteModal()}
-              className="p-2.5 px-3.5 rounded-lg bg-slate-800/90 hover:bg-[#BB7636] text-white border border-slate-700 hover:border-[#BB7636] transition-all flex items-center gap-2 group shadow-sm font-heading font-semibold text-xs"
-              title="Solicitar Cotação Comercial"
-            >
-              <FileText className="w-4 h-4 text-[#BB7636] group-hover:text-white transition-colors" />
-              <span>Pedir Cotação</span>
-            </button>
-
             {/* Fale Connosco Primary Action Button */}
             <button
               onClick={onOpenContactModal}

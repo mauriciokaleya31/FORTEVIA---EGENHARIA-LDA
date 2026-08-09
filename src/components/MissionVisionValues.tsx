@@ -14,15 +14,7 @@ export const MissionVisionValues: React.FC = () => {
     <section className="py-16 md:py-24 bg-white text-slate-800 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-[#081B4B]">
-            Missão, Visão & Valores
-          </h2>
-          <p className="text-slate-600 text-sm sm:text-base">
-            Os princípios orientadores que moldam as nossas decisões, operações e compromissos com o mercado industrial angolano.
-          </p>
-        </div>
+
 
         {/* 3 Main Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

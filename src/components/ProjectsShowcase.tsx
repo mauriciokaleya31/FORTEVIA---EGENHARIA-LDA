@@ -29,10 +29,7 @@ export const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({ onOpenContac
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#081B4B]/10 border border-[#081B4B]/20 text-[#081B4B] text-xs font-heading font-bold uppercase tracking-wider">
-            <ImageIcon className="w-3.5 h-3.5 text-[#BB7636]" />
-            <span>Galeria de Projectos & Operações em Campo</span>
-          </div>
+
           <h2 className="font-heading font-extrabold text-3xl sm:text-5xl text-[#081B4B]">
             Galeria de Projectos Fortevia
           </h2>

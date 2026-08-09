@@ -232,25 +232,6 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
           })}
         </div>
 
-        {/* Custom Sourcing Callout */}
-        <div className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-[#081B4B] to-slate-900 text-white border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="space-y-1 max-w-xl">
-            <h4 className="font-heading font-bold text-xl text-white flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#BB7636]" />
-              <span>Não encontrou o equipamento específico que procura?</span>
-            </h4>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              A nossa equipa de Procurement Internacional localiza, importa e entrega qualquer equipamento para a indústria petrolífera e marítima sob norma ISO/API/ASME com certificação do fabricante.
-            </p>
-          </div>
-          <button
-            onClick={onOpenContactModal}
-            className="bg-[#BB7636] text-white hover:bg-[#a5652a] font-heading font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider whitespace-nowrap shadow-lg transition-transform active:scale-95"
-          >
-            Consultar Equipa de Procurement
-          </button>
-        </div>
-
       </div>
 
       {/* Product Quick View Modal */}

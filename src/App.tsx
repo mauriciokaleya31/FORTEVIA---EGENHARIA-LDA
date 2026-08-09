@@ -54,7 +54,6 @@ export default function App() {
             />
             <AboutSection setActivePage={setActivePage} />
             <MissionVisionValues />
-            <AreasActuacao setActivePage={setActivePage} />
             <ServicesSection
               onOpenQuoteModal={handleOpenQuoteModal}
               onOpenContactModal={handleOpenContactModal}
@@ -62,8 +61,8 @@ export default function App() {
             <ProductsSection
               onOpenQuoteModal={handleOpenQuoteModal}
               onOpenContactModal={handleOpenContactModal}
+              setActivePage={setActivePage}
             />
-            <WhyChooseUs />
             <PartnershipCTA onOpenContactModal={handleOpenContactModal} />
             <ProjectsShowcase onOpenContactModal={handleOpenContactModal} />
           </>
