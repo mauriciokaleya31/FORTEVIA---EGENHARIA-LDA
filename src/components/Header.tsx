@@ -2,20 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
 import { COMPANY_INFO } from '../data/forteviaData';
 import { PageRoute } from '../types';
-import { Phone, Mail, MapPin, Menu, X, ShoppingBag, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Menu, X, FileText, ArrowRight } from 'lucide-react';
+import { LanguageSelector } from './LanguageSelector';
 
 interface HeaderProps {
   activePage: PageRoute;
   setActivePage: (page: PageRoute) => void;
-  quoteCartCount: number;
-  onOpenQuoteModal: () => void;
+  onOpenQuoteModal: (itemName?: string) => void;
   onOpenContactModal: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   activePage,
   setActivePage,
-  quoteCartCount,
   onOpenQuoteModal,
   onOpenContactModal,
 }) => {
@@ -73,7 +72,8 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <div className="flex items-center gap-3 text-[11px]">
-            <span className="text-slate-400">Soyo • Luanda • Offshore</span>
+            <span className="text-slate-400 hidden sm:inline">Soyo • Luanda • Offshore</span>
+            <LanguageSelector />
           </div>
         </div>
       </div>
@@ -121,21 +121,14 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Right Controls & CTAs */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Quote Request Basket/Cart Button */}
+            {/* Quote Request Button */}
             <button
-              onClick={onOpenQuoteModal}
-              className="relative p-2.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-[#BB7636] transition-all flex items-center gap-2 group"
-              title="Solicitação de Cotações"
+              onClick={() => onOpenQuoteModal()}
+              className="p-2.5 px-3.5 rounded-lg bg-slate-800/90 hover:bg-[#BB7636] text-white border border-slate-700 hover:border-[#BB7636] transition-all flex items-center gap-2 group shadow-sm font-heading font-semibold text-xs"
+              title="Solicitar Cotação Comercial"
             >
-              <ShoppingBag className="w-4 h-4 text-[#BB7636] group-hover:scale-110 transition-transform" />
-              <span className="text-xs font-heading font-semibold text-white hidden xl:inline">
-                Cotações
-              </span>
-              {quoteCartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-[#BB7636] text-white font-bold text-[10px] rounded-full flex items-center justify-center animate-pulse">
-                  {quoteCartCount}
-                </span>
-              )}
+              <FileText className="w-4 h-4 text-[#BB7636] group-hover:text-white transition-colors" />
+              <span>Pedir Cotação</span>
             </button>
 
             {/* Fale Connosco Primary Action Button */}
@@ -148,19 +141,15 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Controls */}
           <div className="flex items-center gap-2 lg:hidden">
             <button
-              onClick={onOpenQuoteModal}
-              className="relative p-2 rounded-lg bg-slate-800 text-slate-200 border border-slate-700"
-              aria-label="Cotações"
+              onClick={() => onOpenQuoteModal()}
+              className="p-2 rounded-lg bg-slate-800 hover:bg-[#BB7636] text-white border border-slate-700 transition-colors"
+              aria-label="Pedir Cotação"
+              title="Pedir Cotação"
             >
-              <ShoppingBag className="w-5 h-5 text-[#BB7636]" />
-              {quoteCartCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#BB7636] text-white font-bold text-[9px] rounded-full flex items-center justify-center">
-                  {quoteCartCount}
-                </span>
-              )}
+              <FileText className="w-5 h-5 text-[#BB7636]" />
             </button>
 
             <button
@@ -192,6 +181,22 @@ export const Header: React.FC<HeaderProps> = ({
             ))}
 
             <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
+              <div className="flex items-center justify-between px-2 py-1 bg-slate-900/60 rounded-lg">
+                <span className="text-xs text-slate-300 font-heading font-semibold">Idioma / Translation:</span>
+                <LanguageSelector />
+              </div>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenQuoteModal();
+                }}
+                className="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-lg font-heading font-semibold text-xs flex items-center justify-center gap-2 border border-slate-700"
+              >
+                <FileText className="w-4 h-4 text-[#BB7636]" />
+                <span>Pedir Cotação</span>
+              </button>
+
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);

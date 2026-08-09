@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PageRoute, QuoteCartItem, ServiceItem, ProductItem, TrainingCourse } from './types';
+import { PageRoute, TrainingCourse } from './types';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Hero } from './components/Hero';
@@ -14,33 +14,19 @@ import { PartnershipCTA } from './components/PartnershipCTA';
 import { CallToAction } from './components/CallToAction';
 import { ProjectsShowcase } from './components/ProjectsShowcase';
 import { ContactSection } from './components/ContactSection';
-import { QuoteCartModal } from './components/QuoteCartModal';
+import { QuoteModal } from './components/QuoteModal';
 import { CourseInquiryModal } from './components/CourseInquiryModal';
 import { WhatsAppButton } from './components/WhatsAppButton';
 
 export default function App() {
   const [activePage, setActivePage] = useState<PageRoute>('home');
-  const [quoteCart, setQuoteCart] = useState<QuoteCartItem[]>([]);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [quoteItemName, setQuoteItemName] = useState('');
   const [activeCourseInquiry, setActiveCourseInquiry] = useState<TrainingCourse | null>(null);
 
-  // Add Item to Quote Basket
-  const handleAddToQuote = (item: ServiceItem | ProductItem) => {
-    const newItem: QuoteCartItem = {
-      id: `${item.id}-${Date.now()}`,
-      title: 'name' in item ? item.name : item.title,
-      type: 'name' in item ? 'product' : 'service',
-    };
-    setQuoteCart((prev) => [...prev, newItem]);
+  const handleOpenQuoteModal = (itemName?: string) => {
+    setQuoteItemName(itemName || '');
     setIsQuoteModalOpen(true);
-  };
-
-  const handleRemoveFromQuote = (id: string) => {
-    setQuoteCart((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const handleClearCart = () => {
-    setQuoteCart([]);
   };
 
   const handleOpenContactModal = () => {
@@ -54,8 +40,7 @@ export default function App() {
       <Header
         activePage={activePage}
         setActivePage={setActivePage}
-        quoteCartCount={quoteCart.length}
-        onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+        onOpenQuoteModal={handleOpenQuoteModal}
         onOpenContactModal={handleOpenContactModal}
       />
 
@@ -71,11 +56,11 @@ export default function App() {
             <MissionVisionValues />
             <AreasActuacao setActivePage={setActivePage} />
             <ServicesSection
-              onAddToQuote={handleAddToQuote}
+              onOpenQuoteModal={handleOpenQuoteModal}
               onOpenContactModal={handleOpenContactModal}
             />
             <ProductsSection
-              onAddToQuote={handleAddToQuote}
+              onOpenQuoteModal={handleOpenQuoteModal}
               onOpenContactModal={handleOpenContactModal}
             />
             <TrainingSection
@@ -86,7 +71,7 @@ export default function App() {
             <PartnershipCTA onOpenContactModal={handleOpenContactModal} />
             <ProjectsShowcase onOpenContactModal={handleOpenContactModal} />
             <CallToAction
-              onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+              onOpenQuoteModal={() => handleOpenQuoteModal()}
               onOpenContactModal={handleOpenContactModal}
             />
             <ContactSection />
@@ -157,11 +142,11 @@ export default function App() {
               </div>
             </div>
             <ServicesSection
-              onAddToQuote={handleAddToQuote}
+              onOpenQuoteModal={handleOpenQuoteModal}
               onOpenContactModal={handleOpenContactModal}
             />
             <CallToAction
-              onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+              onOpenQuoteModal={() => handleOpenQuoteModal()}
               onOpenContactModal={handleOpenContactModal}
             />
           </>
@@ -194,11 +179,11 @@ export default function App() {
               </div>
             </div>
             <ProductsSection
-              onAddToQuote={handleAddToQuote}
+              onOpenQuoteModal={handleOpenQuoteModal}
               onOpenContactModal={handleOpenContactModal}
             />
             <CallToAction
-              onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+              onOpenQuoteModal={() => handleOpenQuoteModal()}
               onOpenContactModal={handleOpenContactModal}
             />
           </>
@@ -235,7 +220,7 @@ export default function App() {
               onOpenCourseInquiry={(course) => setActiveCourseInquiry(course)}
             />
             <CallToAction
-              onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+              onOpenQuoteModal={() => handleOpenQuoteModal()}
               onOpenContactModal={handleOpenContactModal}
             />
           </>
@@ -270,7 +255,7 @@ export default function App() {
             <ProjectsShowcase onOpenContactModal={handleOpenContactModal} />
             <PartnershipCTA onOpenContactModal={handleOpenContactModal} />
             <CallToAction
-              onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+              onOpenQuoteModal={() => handleOpenQuoteModal()}
               onOpenContactModal={handleOpenContactModal}
             />
           </>
@@ -308,12 +293,10 @@ export default function App() {
       <WhatsAppButton />
 
       {/* Quote Request Modal */}
-      <QuoteCartModal
+      <QuoteModal
         isOpen={isQuoteModalOpen}
         onClose={() => setIsQuoteModalOpen(false)}
-        cartItems={quoteCart}
-        onRemoveItem={handleRemoveFromQuote}
-        onClearCart={handleClearCart}
+        initialItemName={quoteItemName}
       />
 
       {/* Course Inquiry Modal */}

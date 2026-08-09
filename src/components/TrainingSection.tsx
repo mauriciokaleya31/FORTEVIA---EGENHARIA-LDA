@@ -35,9 +35,6 @@ export const TrainingSection: React.FC<TrainingSectionProps> = ({
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <span className="text-xs font-heading font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-            Capacitação de Capital Humano
-          </span>
           <h2 className="font-heading font-extrabold text-3xl sm:text-5xl text-white">
             Formação e Desenvolvimento Profissional
           </h2>

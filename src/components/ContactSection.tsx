@@ -15,15 +15,79 @@ export const ContactSection: React.FC = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submittedMailUrl, setSubmittedMailUrl] = useState('');
+  const [submittedWaUrl, setSubmittedWaUrl] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1000);
+    const subjectStr = `[Contacto Website] - ${formData.assunto} - ${formData.nome}`;
+    const subject = encodeURIComponent(subjectStr);
+    const bodyStr = 
+      `MENSAGEM DE CONTACTO - WEBSITE FORTEVIA ENGENHARIA\n` +
+      `----------------------------------------------\n` +
+      `Destinatário: geral@forteviaengenharia.com\n\n` +
+      `Nome: ${formData.nome}\n` +
+      `Empresa: ${formData.empresa || 'N/A'}\n` +
+      `E-mail: ${formData.email}\n` +
+      `Telefone/WhatsApp: ${formData.telefone}\n` +
+      `Assunto: ${formData.assunto}\n\n` +
+      `MENSAGEM:\n${formData.mensagem}\n\n` +
+      `----------------------------------------------\n` +
+      `Fortevia Engenharia • Soyo, Angola`;
+      
+    const body = encodeURIComponent(bodyStr);
+
+    const mailUrl = `mailto:geral@forteviaengenharia.com?subject=${subject}&body=${body}`;
+    const waText = encodeURIComponent(
+      `*MENSAGEM VIA WEBSITE FORTEVIA ENGENHARIA*\n\n` +
+      `*Nome:* ${formData.nome}\n` +
+      `*Empresa:* ${formData.empresa || 'N/A'}\n` +
+      `*E-mail:* ${formData.email}\n` +
+      `*Telefone:* ${formData.telefone}\n` +
+      `*Assunto:* ${formData.assunto}\n\n` +
+      `*Mensagem:*\n${formData.mensagem}`
+    );
+    const waUrl = `https://wa.me/${COMPANY_INFO.phoneClean}?text=${waText}`;
+
+    setSubmittedMailUrl(mailUrl);
+    setSubmittedWaUrl(waUrl);
+
+    // Send via FormSubmit service directly to geral@forteviaengenharia.com
+    try {
+      await fetch('https://formsubmit.co/ajax/geral@forteviaengenharia.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: subjectStr,
+          _replyto: formData.email,
+          _captcha: "false",
+          Nome: formData.nome,
+          Empresa: formData.empresa || 'N/A',
+          Email: formData.email,
+          Telefone: formData.telefone,
+          Assunto: formData.assunto,
+          Mensagem: formData.mensagem,
+          Destinatario: "geral@forteviaengenharia.com"
+        })
+      });
+    } catch (err) {
+      console.warn("FormSubmit fetch failed, falling back to mailto", err);
+    }
+
+    // Automatically trigger mailto link to open client's default email app
+    try {
+      window.location.href = mailUrl;
+    } catch (err) {
+      console.warn("Could not trigger window.location.href mailUrl", err);
+    }
+
+    setLoading(false);
+    setSubmitted(true);
   };
 
   return (
@@ -122,16 +186,44 @@ export const ContactSection: React.FC = () => {
           {/* Right Form Box */}
           <div className="lg:col-span-7 bg-white p-5 sm:p-8 md:p-10 rounded-2xl border border-slate-200 shadow-xl">
             {submitted ? (
-              <div className="py-12 text-center space-y-4 animate-in zoom-in-95 duration-300">
+              <div className="py-10 text-center space-y-5 animate-in zoom-in-95 duration-300">
                 <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full mx-auto flex items-center justify-center shadow-md">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="font-heading font-extrabold text-2xl text-[#081B4B]">
-                  Mensagem Enviada com Sucesso!
-                </h3>
-                <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
-                  Agradecemos o seu contacto com a Fortevia Engenharia. A nossa equipa no Soyo analisará o seu pedido e responderá em breve.
-                </p>
+                <div>
+                  <h3 className="font-heading font-extrabold text-2xl text-[#081B4B]">
+                    Mensagem Registada com Sucesso!
+                  </h3>
+                  <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed mt-1">
+                    A sua mensagem foi dirigida para o e-mail oficial: <strong className="text-[#081B4B]">geral@forteviaengenharia.com</strong>. A nossa equipa no Soyo responderá brevemente.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl max-w-md mx-auto space-y-2.5 text-left">
+                  <p className="text-xs font-heading font-bold text-[#081B4B] text-center uppercase tracking-wider">
+                    Opções de Envio Directo
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <a
+                      href={submittedMailUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-[#081B4B] hover:bg-slate-800 text-white px-3.5 py-2 rounded-lg text-xs font-heading font-bold flex items-center justify-center gap-1.5 shadow"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-[#BB7636]" />
+                      <span>Abrir no E-mail</span>
+                    </a>
+                    <a
+                      href={submittedWaUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-lg text-xs font-heading font-bold flex items-center justify-center gap-1.5 shadow"
+                    >
+                      <span>Enviar no WhatsApp</span>
+                    </a>
+                  </div>
+                </div>
+
                 <button
                   onClick={() => {
                     setSubmitted(false);

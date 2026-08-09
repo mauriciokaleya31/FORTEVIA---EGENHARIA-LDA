@@ -17,11 +17,6 @@ export const CallToAction: React.FC<CallToActionProps> = ({
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#BB7636]/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-8 text-center relative z-10 space-y-6">
-        
-        <span className="text-xs font-heading font-extrabold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-4 py-1.5 rounded-full border border-amber-400/30 inline-block">
-          Atendimento Técnico Imediato • Soyo, Angola
-        </span>
-
         <h2 className="font-heading font-black text-3xl sm:text-5xl text-white leading-tight">
           Tem um projecto ou necessidade específica?
         </h2>

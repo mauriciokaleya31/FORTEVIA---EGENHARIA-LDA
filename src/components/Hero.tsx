@@ -153,34 +153,6 @@ export const Hero: React.FC<HeroProps> = ({ setActivePage, onOpenContactModal })
               </button>
             </div>
 
-            {/* Indicators Bar below Hero */}
-            <div className="pt-4 sm:pt-6 border-t border-slate-800/80">
-              <p className="text-[10px] sm:text-xs font-heading font-semibold uppercase tracking-widest text-slate-400 mb-2">
-                Principais Áreas de Especialidade:
-              </p>
-              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs font-heading font-bold text-slate-200">
-                <span className="px-2.5 py-1 rounded bg-white/10 border border-white/10 text-white flex items-center gap-1.5 text-[11px] sm:text-xs">
-                  <Wrench className="w-3.5 h-3.5 text-[#BB7636]" />
-                  Engenharia
-                </span>
-                <span className="text-[#BB7636] font-normal hidden sm:inline">|</span>
-                <span className="px-2.5 py-1 rounded bg-white/10 border border-white/10 text-white flex items-center gap-1.5 text-[11px] sm:text-xs">
-                  <Globe className="w-3.5 h-3.5 text-[#BB7636]" />
-                  Procurement
-                </span>
-                <span className="text-[#BB7636] font-normal hidden sm:inline">|</span>
-                <span className="px-2.5 py-1 rounded bg-white/10 border border-white/10 text-white flex items-center gap-1.5 text-[11px] sm:text-xs">
-                  <Shield className="w-3.5 h-3.5 text-[#BB7636]" />
-                  Logística
-                </span>
-                <span className="text-[#BB7636] font-normal hidden sm:inline">|</span>
-                <span className="px-2.5 py-1 rounded bg-white/10 border border-white/10 text-white flex items-center gap-1.5 text-[11px] sm:text-xs">
-                  <Award className="w-3.5 h-3.5 text-[#BB7636]" />
-                  Serviços Técnicos
-                </span>
-              </div>
-            </div>
-
           </div>
 
         </div>

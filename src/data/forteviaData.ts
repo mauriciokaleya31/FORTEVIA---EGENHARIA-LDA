@@ -623,31 +623,58 @@ export const TRAINING_COURSES: TrainingCourse[] = [
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
-    id: 'kwanda-logistics-hub',
-    title: 'Mobilização de Equipamentos Hidráulicos — Base do Kwanda',
-    category: 'Logística & Procurement',
-    location: 'Soyo, Angola',
-    description: 'Fornecimento contínuo de ferramentas hidráulicas de torqueamento ENERPAC e quadros de testes para suporte a embarcações e sondas offshore na Base do Kwanda.',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
-    highlights: ['Prazo de entrega sob Incoterms DDP', 'Controlo de qualidade zero falhas', 'Suporte técnico local no Soyo']
+    id: 'project-1',
+    title: 'Operações Marítimas & Apoio Offshore',
+    category: 'Logística & Apoio Offshore',
+    location: 'Soyo & Base do Kwanda, Angola',
+    description: 'Suporte a operações logísticas e infraestruturas marítimas para o sector de petróleo e gás no Soyo.',
+    image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/24.png',
+    highlights: ['Suporte contínuo 24/7 no Soyo', 'Padrões internacionais de segurança HSE', 'Logística integrada em campo']
   },
   {
-    id: 'valve-overhaul-offshore',
-    title: 'Inspecção e Recertificação de Válvulas PSV em Plataforma Offshore',
+    id: 'project-2',
+    title: 'Manutenção e Intervenção em Equipamentos Pesados',
     category: 'Serviços Técnicos',
-    location: 'Offshore Angola',
-    description: 'Mobilização de bancada de teste móvel e técnicos de válvulas para manutenção preventiva e calibração de 45 válvulas de alívio e segurança.',
-    image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80',
-    highlights: ['Calibração in-situ', 'Emissão de certificados digitais', 'Zero paralisação de produção']
+    location: 'Soyo Industrial Hub, Angola',
+    description: 'Intervenção técnica especializada em equipamentos hidráulicos, bombas e sistemas de elevada pressão.',
+    image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/25.png',
+    highlights: ['Inspeção rigorosa de ativos', 'Manutenção preventiva e corretiva', 'Técnicos certificados']
   },
   {
-    id: 'subsea-spool-fabrication',
-    title: 'Fabrico e Testes Hidroestáticos de Spools de Tubagem em Aço Duplex',
-    category: 'Engenharia & Fabrico',
-    location: 'Soyo Industrial Hub, Angola',
-    description: 'Pré-fabrico de tubagens em aço inoxidável Duplex com testes hidroestáticos a 15.000 PSI e inspecção NDT para projectos submarinos.',
-    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80',
-    highlights: ['Soldadura qualificada ASME IX', 'Inspecção NDT 100%', 'Tratamento anticorrosivo marino']
+    id: 'project-3',
+    title: 'Serviços de Aperto Controlado & Hidráulica',
+    category: 'Engenharia Hidráulica',
+    location: 'Offshore Angola',
+    description: 'Execução de serviços de torqueamento e tensionamento mecânico com equipamentos de alta precisão.',
+    image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/26.png',
+    highlights: ['Ferramentas ENERPAC & Hi-Force', 'Certificação de integridade de juntas', 'Zero fugas e máxima eficiência']
+  },
+  {
+    id: 'project-4',
+    title: 'Inspecção e Fabrico em Campo',
+    category: 'Fabrico & Caldeiraria',
+    location: 'Base do Kwanda, Soyo',
+    description: 'Sistemas de pré-fabrico de tubagens, spools e estrutura industrial com ensaios não destrutivos.',
+    image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/27.png',
+    highlights: ['Soldadura qualificada ASME/WPS', 'Testes de pressão até 15.000 PSI', 'Supervisão técnica dedicada']
+  },
+  {
+    id: 'project-5',
+    title: 'Mobilização de Ativos & Estruturas de Suporte',
+    category: 'Procurement & Logística',
+    location: 'Soyo, Angola',
+    description: 'Coordenamento e mobilização urgente de ativos de engenharia e fornecimento para blocos petrolíferos.',
+    image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/28.png',
+    highlights: ['Aprovisionamento ágil de OEMs', 'Controlo estrito de prazos', 'Apoio aduaneiro e trânsito']
+  },
+  {
+    id: 'project-6',
+    title: 'Operações de Campo & Logística Especializada',
+    category: 'Operações Industriais',
+    location: 'Soyo & Offshore Angola',
+    description: 'Operações integradas de manutenção, suporte logístico e fornecimento contínuo aos clientes da indústria.',
+    image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/29.png',
+    highlights: ['Equipas multidisciplinares em Angola', 'Qualidade e fiabilidade garantidas', 'Apoio directo ao cliente']
   }
 ];
 

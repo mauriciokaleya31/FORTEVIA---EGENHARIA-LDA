@@ -20,10 +20,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 group">
               <img
-                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80"
-                alt="Engenheiros e Técnicos da Fortevia Engenharia no Soyo"
+                src="https://visa.onlyvibes.online/wp-content/uploads/2026/08/danalbangola-4.png"
+                alt="Fortevia Engenharia no Soyo"
                 onError={(e) => {
-                  e.currentTarget.src = 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=1200&q=80';
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80';
                 }}
                 className="w-full h-[320px] sm:h-[450px] md:h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -42,21 +42,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 </div>
               </div>
             </div>
-
-            {/* Corner Decorative Box */}
-            <div className="hidden sm:block absolute -top-6 -left-6 bg-[#081B4B] text-white p-4 rounded-xl border border-[#BB7636]/40 shadow-xl max-w-[200px]">
-              <p className="font-heading font-bold text-xs text-[#BB7636] uppercase tracking-wider">Operações Logísticas</p>
-              <p className="text-xs font-semibold mt-1">Conhecimento avançado de Incoterms 2020</p>
-            </div>
           </div>
 
           {/* Text Content Column */}
           <div className="lg:col-span-7 space-y-6">
             
             <div className="space-y-2">
-              <span className="text-xs font-heading font-bold uppercase tracking-widest text-[#BB7636]">
-                Sobre a Fortevia Engenharia
-              </span>
               <h2 className={`font-heading font-extrabold text-2xl sm:text-4xl leading-tight ${isStandalonePage ? 'text-white' : 'text-[#081B4B]'}`}>
                 Soluções que geram valor.{' '}
                 <span className="text-[#BB7636]">Experiência que faz a diferença.</span>

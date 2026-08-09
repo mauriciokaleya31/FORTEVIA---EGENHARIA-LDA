@@ -8,12 +8,12 @@ import {
 } from 'lucide-react';
 
 interface ServicesSectionProps {
-  onAddToQuote: (service: ServiceItem) => void;
+  onOpenQuoteModal: (itemName?: string) => void;
   onOpenContactModal: () => void;
 }
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({
-  onAddToQuote,
+  onOpenQuoteModal,
   onOpenContactModal,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -161,12 +161,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     </button>
 
                     <button
-                      onClick={() => onAddToQuote(service)}
-                      className="bg-[#BB7636] hover:bg-[#a5652a] text-white px-3 py-2.5 rounded-lg font-heading font-bold text-xs transition-colors flex items-center gap-1 shadow-sm"
-                      title="Adicionar à lista de cotação"
+                      onClick={() => onOpenQuoteModal(service.title)}
+                      className="bg-[#BB7636] hover:bg-[#a5652a] text-white px-3.5 py-2.5 rounded-lg font-heading font-bold text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+                      title="Solicitar Cotação para este serviço"
                     >
-                      <Plus className="w-3.5 h-3.5" />
-                      <span>Cotar</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span>Pedir Cotação</span>
                     </button>
                   </div>
                 </div>
@@ -267,13 +267,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <button
                   onClick={() => {
-                    onAddToQuote(activeModalService);
+                    const title = activeModalService.title;
                     setActiveModalService(null);
+                    onOpenQuoteModal(title);
                   }}
-                  className="w-full sm:w-auto bg-[#BB7636] hover:bg-[#a5652a] text-white px-6 py-3 rounded-lg font-heading font-bold text-xs uppercase transition-colors flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto bg-[#BB7636] hover:bg-[#a5652a] text-white px-6 py-3 rounded-lg font-heading font-bold text-xs uppercase transition-colors flex items-center justify-center gap-2 shadow"
                 >
-                  <Plus className="w-4 h-4" />
-                  <span>Adicionar à Solicitação de Cotação</span>
+                  <ArrowRight className="w-4 h-4" />
+                  <span>Solicitar Cotação para este Serviço</span>
                 </button>
 
                 <button

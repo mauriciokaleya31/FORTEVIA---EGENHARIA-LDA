@@ -11,9 +11,6 @@ export const WhyChooseUs: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-heading font-bold uppercase tracking-widest text-[#BB7636] bg-[#BB7636]/10 px-3 py-1 rounded-full border border-[#BB7636]/20">
-            Diferenciais de Mercado
-          </span>
           <h2 className="font-heading font-extrabold text-3xl sm:text-5xl text-[#081B4B]">
             Porque escolher a Fortevia Engenharia?
           </h2>

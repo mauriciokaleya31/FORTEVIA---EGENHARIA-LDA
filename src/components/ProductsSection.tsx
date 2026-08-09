@@ -8,12 +8,12 @@ import {
 } from 'lucide-react';
 
 interface ProductsSectionProps {
-  onAddToQuote: (product: ProductItem) => void;
+  onOpenQuoteModal: (itemName?: string) => void;
   onOpenContactModal: () => void;
 }
 
 export const ProductsSection: React.FC<ProductsSectionProps> = ({
-  onAddToQuote,
+  onOpenQuoteModal,
   onOpenContactModal,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -65,9 +65,6 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <span className="text-xs font-heading font-bold uppercase tracking-widest text-[#BB7636] bg-[#BB7636]/10 px-3 py-1 rounded-full border border-[#BB7636]/20">
-            Fornecimento Global & OEMs
-          </span>
           <h2 className="font-heading font-extrabold text-3xl sm:text-5xl text-[#081B4B]">
             Produtos e Equipamentos Industriais
           </h2>
@@ -158,10 +155,10 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                   {/* Quote CTA Button */}
                   <div className="pt-3 border-t border-slate-200">
                     <button
-                      onClick={() => onAddToQuote(product)}
+                      onClick={() => onOpenQuoteModal(product.name)}
                       className="w-full bg-[#BB7636] hover:bg-[#a5652a] text-white py-2.5 px-3 rounded-lg font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95"
                     >
-                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <Tag className="w-3.5 h-3.5" />
                       <span>Solicitar Cotação</span>
                     </button>
                   </div>

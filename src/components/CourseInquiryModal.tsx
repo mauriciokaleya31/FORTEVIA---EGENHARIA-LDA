@@ -15,17 +15,82 @@ export const CourseInquiryModal: React.FC<CourseInquiryModalProps> = ({ course, 
   const [participantes, setParticipantes] = useState('1');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submittedMailUrl, setSubmittedMailUrl] = useState('');
+  const [submittedWaUrl, setSubmittedWaUrl] = useState('');
 
   if (!course) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1000);
+    const subjectStr = `[Inscrição Formação] - ${course.title} - ${nome}`;
+    const subject = encodeURIComponent(subjectStr);
+    const bodyStr = 
+      `INSCRIÇÃO / CONSULTA DE FORMAÇÃO PROFISSIONAL\n` +
+      `----------------------------------------------\n` +
+      `Destinatário: geral@forteviaengenharia.com\n\n` +
+      `Curso / Acção: ${course.title}\n` +
+      `Duração: ${course.duration || 'N/A'}\n` +
+      `Nome do Candidato/Responsável: ${nome}\n` +
+      `Empresa: ${empresa || 'N/A'}\n` +
+      `E-mail: ${email}\n` +
+      `Telefone/WhatsApp: ${telefone}\n` +
+      `Número de Formandos: ${participantes}\n\n` +
+      `----------------------------------------------\n` +
+      `Fortevia Engenharia • Soyo, Angola`;
+      
+    const body = encodeURIComponent(bodyStr);
+
+    const mailUrl = `mailto:geral@forteviaengenharia.com?subject=${subject}&body=${body}`;
+    const waText = encodeURIComponent(
+      `*INSCRIÇÃO FORMAÇÃO PROFISSIONAL - FORTEVIA*\n\n` +
+      `*Curso:* ${course.title}\n` +
+      `*Nome:* ${nome}\n` +
+      `*Empresa:* ${empresa || 'N/A'}\n` +
+      `*E-mail:* ${email}\n` +
+      `*Telefone:* ${telefone}\n` +
+      `*Formandos:* ${participantes}`
+    );
+    const waUrl = `https://wa.me/244936611252?text=${waText}`;
+
+    setSubmittedMailUrl(mailUrl);
+    setSubmittedWaUrl(waUrl);
+
+    // Send via FormSubmit service directly to geral@forteviaengenharia.com
+    try {
+      await fetch('https://formsubmit.co/ajax/geral@forteviaengenharia.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: subjectStr,
+          _replyto: email,
+          _captcha: "false",
+          Curso: course.title,
+          Nome: nome,
+          Empresa: empresa || 'N/A',
+          Email: email,
+          Telefone: telefone,
+          Numero_Formandos: participantes,
+          Destinatario: "geral@forteviaengenharia.com"
+        })
+      });
+    } catch (err) {
+      console.warn("FormSubmit fetch failed, falling back to mailto", err);
+    }
+
+    // Automatically trigger mailto link to open client's default email app
+    try {
+      window.location.href = mailUrl;
+    } catch (err) {
+      console.warn("Could not trigger window.location.href mailUrl", err);
+    }
+
+    setLoading(false);
+    setSubmitted(true);
   };
 
   return (
@@ -59,19 +124,44 @@ export const CourseInquiryModal: React.FC<CourseInquiryModalProps> = ({ course, 
         {/* Form Body */}
         <div className="p-6">
           {submitted ? (
-            <div className="py-8 text-center space-y-3">
+            <div className="py-6 text-center space-y-4 animate-in zoom-in-95 duration-200">
               <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full mx-auto flex items-center justify-center shadow-md">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
               <h4 className="font-heading font-bold text-xl text-[#081B4B]">
-                Inscrição Registada!
+                Inscrição Registada com Sucesso!
               </h4>
-              <p className="text-slate-600 text-xs">
-                Recebemos o seu pedido de informações para a acção de formação <strong>"{course.title}"</strong>. A nossa equipa pedagógica entrará em contacto para disponibilizar a ficha de inscrição e calendário de sessões no Soyo.
+              <p className="text-slate-600 text-xs leading-relaxed max-w-sm mx-auto">
+                A sua consulta sobre o curso <strong>"{course.title}"</strong> foi dirigida ao departamento de formação no e-mail: <strong className="text-[#081B4B]">geral@forteviaengenharia.com</strong>.
               </p>
+
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-left text-xs">
+                <p className="font-heading font-bold text-[#081B4B] text-center uppercase tracking-wider text-[11px]">
+                  Canais Directos
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <a
+                    href={submittedMailUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#081B4B] hover:bg-slate-800 text-white px-3 py-2 rounded-lg text-xs font-heading font-bold flex items-center justify-center gap-1 shadow"
+                  >
+                    <span>Abrir E-mail</span>
+                  </a>
+                  <a
+                    href={submittedWaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-xs font-heading font-bold flex items-center justify-center gap-1 shadow"
+                  >
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+
               <button
                 onClick={onClose}
-                className="mt-2 bg-[#081B4B] text-white px-5 py-2 rounded-lg font-heading font-bold text-xs uppercase"
+                className="bg-[#081B4B] text-white px-6 py-2.5 rounded-lg font-heading font-bold text-xs uppercase"
               >
                 Concluir
               </button>

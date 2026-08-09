@@ -12,11 +12,6 @@ export const PartnershipCTA: React.FC<PartnershipCTAProps> = ({ onOpenContactMod
         <div className="bg-gradient-to-r from-slate-900 via-[#081B4B] to-slate-900 p-8 sm:p-12 rounded-3xl border border-slate-700 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
           
           <div className="space-y-4 max-w-2xl text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#BB7636]/20 border border-[#BB7636]/40 text-amber-300 text-xs font-heading font-semibold">
-              <Handshake className="w-4 h-4 text-[#BB7636]" />
-              <span>Oportunidades de Negócio & Cooperações</span>
-            </div>
-
             <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-white">
               Construímos Parcerias. Criamos Valor.
             </h2>
