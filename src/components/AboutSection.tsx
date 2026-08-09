@@ -22,7 +22,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               <img
                 src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80"
                 alt="Engenheiros e Técnicos da Fortevia Engenharia no Soyo"
-                className="w-full h-[400px] sm:h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
+                onError={(e) => {
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=1200&q=80';
+                }}
+                className="w-full h-[320px] sm:h-[450px] md:h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#081B4B]/90 via-transparent to-transparent" />
               

@@ -77,7 +77,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
         </div>
 
         {/* Filter Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 bg-slate-50 p-3.5 sm:p-4 rounded-2xl border border-slate-200">
           {/* Search Bar */}
           <div className="relative w-full md:w-80">
             <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
@@ -86,17 +86,17 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
               placeholder="Procurar produto ou marca (ex: Enerpac, Válvula)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-300 text-xs focus:outline-none focus:border-[#BB7636] focus:ring-1 focus:ring-[#BB7636]"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-[#BB7636] focus:ring-1 focus:ring-[#BB7636]"
             />
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+          {/* Category Tabs with smooth touch scroll on mobile */}
+          <div className="flex items-center gap-1.5 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 scrollbar-none">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3 py-2 rounded-lg font-heading text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`px-3.5 py-2.5 rounded-xl font-heading text-xs font-semibold whitespace-nowrap transition-all flex-shrink-0 ${
                   selectedCategory === cat.id
                     ? 'bg-[#081B4B] text-white shadow'
                     : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'
@@ -109,7 +109,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {filteredProducts.map((product) => {
             const IconComp = getIcon(product.iconName);
             return (
@@ -122,6 +122,9 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                   <img
                     src={product.image}
                     alt={product.name}
+                    onError={(e) => {
+                      e.currentTarget.src = 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
+                    }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#081B4B]/80 via-transparent to-transparent" />

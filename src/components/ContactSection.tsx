@@ -117,42 +117,10 @@ export const ContactSection: React.FC = () => {
                 <span className="text-[#BB7636] font-bold">Soyo • Angola</span>
               </div>
             </div>
-
-            {/* Interactive Location Map Representation */}
-            <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-md">
-              <div className="flex items-center justify-between mb-3 text-xs font-heading font-bold text-[#081B4B]">
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-[#BB7636]" />
-                  <span>Localização no Soyo (Base do Kwanda)</span>
-                </span>
-                <span className="text-slate-400">Proximidade com o Porto</span>
-              </div>
-
-              <div className="relative h-48 rounded-xl overflow-hidden bg-slate-200 border border-slate-300 group">
-                {/* Styled Map Background Representation */}
-                <div className="absolute inset-0 bg-[#e5e9f0] bg-grid-pattern opacity-60" />
-                
-                {/* Estuary / River Zaire Line Representation */}
-                <div className="absolute top-0 right-0 bottom-0 w-28 bg-sky-200/80 border-l-2 border-sky-300 flex items-center justify-center">
-                  <span className="text-[10px] font-heading font-bold text-sky-700 transform -rotate-90">Rio Zaire / Oceano</span>
-                </div>
-
-                {/* Kwanda Base Marker */}
-                <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                  <div className="w-8 h-8 rounded-full bg-[#081B4B] text-[#BB7636] border-2 border-white shadow-xl flex items-center justify-center animate-bounce">
-                    <Building2 className="w-4 h-4" />
-                  </div>
-                  <div className="bg-[#081B4B] text-white text-[10px] font-heading font-bold px-2 py-0.5 rounded shadow mt-1 whitespace-nowrap">
-                    FORTEVIA ENGENHARIA (Soyo)
-                  </div>
-                  <span className="text-[9px] font-medium text-slate-600">Rua Direita da Base do Kwanda</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Right Form Box */}
-          <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-2xl border border-slate-200 shadow-xl">
+          <div className="lg:col-span-7 bg-white p-5 sm:p-8 md:p-10 rounded-2xl border border-slate-200 shadow-xl">
             {submitted ? (
               <div className="py-12 text-center space-y-4 animate-in zoom-in-95 duration-300">
                 <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full mx-auto flex items-center justify-center shadow-md">

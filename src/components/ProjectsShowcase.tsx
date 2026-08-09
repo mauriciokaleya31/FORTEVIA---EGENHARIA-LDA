@@ -25,16 +25,19 @@ export const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({ onOpenContac
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {PROJECTS_DATA.map((proj) => (
             <div
               key={proj.id}
               className="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-[#BB7636] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
             >
-              <div className="relative h-56 overflow-hidden bg-slate-900">
+              <div className="relative h-48 sm:h-56 overflow-hidden bg-slate-900">
                 <img
                   src={proj.image}
                   alt={proj.title}
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80';
+                  }}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#081B4B] via-[#081B4B]/30 to-transparent" />

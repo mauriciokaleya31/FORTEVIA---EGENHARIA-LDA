@@ -49,9 +49,9 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* Top Bar - Contact Quick Info */}
-      <div className="bg-[#081B4B] text-slate-300 border-b border-slate-800 text-xs py-2 px-4 sm:px-8">
+      <div className="bg-[#081B4B] text-slate-300 border-b border-slate-800 text-[11px] sm:text-xs py-2 px-3 sm:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6">
             <a
               href={`tel:${COMPANY_INFO.phoneClean}`}
               className="flex items-center gap-1.5 hover:text-[#BB7636] transition-colors"
@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
             </a>
             <a
               href={`mailto:${COMPANY_INFO.email}`}
-              className="flex items-center gap-1.5 hover:text-[#BB7636] transition-colors hidden sm:flex"
+              className="flex items-center gap-1.5 hover:text-[#BB7636] transition-colors hidden xs:flex sm:flex"
             >
               <Mail className="w-3.5 h-3.5 text-[#BB7636]" />
               <span>{COMPANY_INFO.email}</span>
@@ -72,8 +72,8 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px]">
-            <span className="hidden lg:inline text-slate-400">Soyo • Luanda • Offshore</span>
+          <div className="flex items-center gap-3 text-[11px]">
+            <span className="text-slate-400">Soyo • Luanda • Offshore</span>
           </div>
         </div>
       </div>
