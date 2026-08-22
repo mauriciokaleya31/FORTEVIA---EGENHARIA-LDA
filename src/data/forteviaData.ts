@@ -1,10 +1,10 @@
-import { ServiceItem, ProductItem, TrainingCourse, ProjectItem } from '../types';
+import { ServiceItem, ProductItem, TrainingCourse, ProjectItem, ClientItem } from '../types';
 
 export const COMPANY_INFO = {
   name: 'FORTEVIA ENGENHARIA',
   taglinePt: 'Excelência em Engenharia. Eficiência em Procurement. Logística Sem Fronteiras.',
   taglineEn: 'Engineering Excellence. Procurement Efficiency. Logistics Without Borders.',
-  location: 'Soyo, Rua Direita da Base do Kwanda, Angola',
+  location: 'Soyo, Província do Zaire, Angola',
   phone: '+244 936 611 252',
   phoneClean: '244936611252',
   email: 'geral@forteviaengenharia.com',
@@ -41,7 +41,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
     features: [
       'Equipamentos com certificação e testes em dia',
-      'Mobilização rápida para a Base do Kwanda e plataformas offshore',
+      'Mobilização rápida para instalações onshore e plataformas offshore',
       'Assistência técnica 24/7 no local',
       'Planos de aluguer de curto, médio e longo prazo'
     ],
@@ -617,7 +617,60 @@ export const TRAINING_COURSES: TrainingCourse[] = [
     category: 'oilgas',
     isAdditional: true,
     duration: '24 Horas',
-    description: 'Visão geral do sector petrolífero em Angola: Bloco 0, Kwanda Base, Sonangol, ANPG e Legislação do Conteúdo Local.'
+    description: 'Visão geral do sector petrolífero em Angola: Bloco 0, Soyo, Sonangol, ANPG e Legislação do Conteúdo Local.'
+  }
+];
+
+export const CLIENTS_DATA: ClientItem[] = [
+  {
+    id: 'somg',
+    name: 'SOMG',
+    fullName: 'SOMG',
+    category: 'Operações Petrolíferas & E&P',
+    description: 'Apoio técnico contínuo, fornecimento de equipamentos industriais, serviços especializados de aperto e soluções de engenharia para operações em Angola.',
+    scope: 'Engenharia, Aperto Controlado & Procurement Técnico',
+    tag: 'Operador Oil & Gas',
+    badgeColor: 'bg-emerald-600'
+  },
+  {
+    id: 'angola-lng',
+    name: 'ANGOLA LNG',
+    fullName: 'ANGOLA LNG',
+    category: 'Gás Natural Liquefeito & Processamento',
+    description: 'Fornecimento de equipamentos certificados, apoio de manutenção, ferramentas hidráulicas, insumos técnicos e suporte logístico no Soyo.',
+    scope: 'Manutenção de Instalações, Ferramentas & Logística no Soyo',
+    tag: 'Planta Industrial de Gás',
+    badgeColor: 'bg-blue-600'
+  },
+  {
+    id: 'sonagas-falcao',
+    name: 'SONAGAS - PROJETO FALCÃO',
+    fullName: 'SONAGAS - PROJETO FALCÃO',
+    category: 'Infraestruturas Energéticas de Transporte de Gás',
+    description: 'Serviços de apoio de engenharia, tubagens industriais, aperto controlado e fornecimento de componentes técnicos para o Projeto Falcão.',
+    scope: 'Projeto Falcão • Apoio de Engenharia & Materiais',
+    tag: 'Projecto Estratégico de Gás',
+    badgeColor: 'bg-amber-600'
+  },
+  {
+    id: 'sogester',
+    name: 'SOGESTER SA',
+    fullName: 'SOGESTER SA',
+    category: 'Gestão de Terminais & Operações Portuárias',
+    description: 'Assistência técnica a equipamentos industriais, sistemas hidráulicos pesados, fornecimento de peças sobressalentes e insumos operacionais.',
+    scope: 'Manutenção de Equipamentos Portuários & Hidráulica',
+    tag: 'Operações Portuárias',
+    badgeColor: 'bg-indigo-600'
+  },
+  {
+    id: 'kayane',
+    name: 'KAYANE LDA',
+    fullName: 'KAYANE LDA',
+    category: 'Serviços & Suporte Industrial Especializado',
+    description: 'Fornecimento e aquisição de materiais de engenharia, ferramentas especializadas e soluções integradas de procurement e logística.',
+    scope: 'Procurement Especializado & Suporte Operacional',
+    tag: 'Parceiro Comercial & Industrial',
+    badgeColor: 'bg-slate-700'
   }
 ];
 
@@ -626,9 +679,10 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: 'project-1',
     title: 'Operações Marítimas & Apoio Offshore',
     category: 'Logística & Apoio Offshore',
-    location: 'Soyo & Base do Kwanda, Angola',
+    location: 'Soyo, Angola',
     description: 'Suporte a operações logísticas e infraestruturas marítimas para o sector de petróleo e gás no Soyo.',
     image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/24.png',
+    fallbackImage: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Suporte contínuo 24/7 no Soyo', 'Padrões internacionais de segurança HSE', 'Logística integrada em campo']
   },
   {
@@ -638,6 +692,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     location: 'Soyo Industrial Hub, Angola',
     description: 'Intervenção técnica especializada em equipamentos hidráulicos, bombas e sistemas de elevada pressão.',
     image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/25.png',
+    fallbackImage: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Inspeção rigorosa de ativos', 'Manutenção preventiva e corretiva', 'Técnicos certificados']
   },
   {
@@ -647,15 +702,17 @@ export const PROJECTS_DATA: ProjectItem[] = [
     location: 'Offshore Angola',
     description: 'Execução de serviços de torqueamento e tensionamento mecânico com equipamentos de alta precisão.',
     image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/26.png',
+    fallbackImage: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Ferramentas ENERPAC & Hi-Force', 'Certificação de integridade de juntas', 'Zero fugas e máxima eficiência']
   },
   {
     id: 'project-4',
     title: 'Inspecção e Fabrico em Campo',
     category: 'Fabrico & Caldeiraria',
-    location: 'Base do Kwanda, Soyo',
+    location: 'Polo Industrial do Soyo, Angola',
     description: 'Sistemas de pré-fabrico de tubagens, spools e estrutura industrial com ensaios não destrutivos.',
     image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/27.png',
+    fallbackImage: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Soldadura qualificada ASME/WPS', 'Testes de pressão até 15.000 PSI', 'Supervisão técnica dedicada']
   },
   {
@@ -665,6 +722,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     location: 'Soyo, Angola',
     description: 'Coordenamento e mobilização urgente de ativos de engenharia e fornecimento para blocos petrolíferos.',
     image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/28.png',
+    fallbackImage: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Aprovisionamento ágil de OEMs', 'Controlo estrito de prazos', 'Apoio aduaneiro e trânsito']
   },
   {
@@ -674,6 +732,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     location: 'Soyo & Offshore Angola',
     description: 'Operações integradas de manutenção, suporte logístico e fornecimento contínuo aos clientes da indústria.',
     image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/29.png',
+    fallbackImage: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Equipas multidisciplinares em Angola', 'Qualidade e fiabilidade garantidas', 'Apoio directo ao cliente']
   }
 ];

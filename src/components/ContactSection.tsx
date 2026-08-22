@@ -100,7 +100,7 @@ export const ContactSection: React.FC = () => {
             Contacte a Fortevia Engenharia
           </h2>
           <p className="text-slate-600 text-sm sm:text-base">
-            Estamos sediados no Soyo, província do Zaire, junto à Base do Kwanda, prontos para responder com celeridade aos seus pedidos de cotação e esclarecimentos técnicos.
+            Estamos sediados no Soyo, província do Zaire, prontos para responder com celeridade aos seus pedidos de cotação e esclarecimentos técnicos.
           </p>
         </div>
 
@@ -125,7 +125,7 @@ export const ContactSection: React.FC = () => {
                       Sede Principal
                     </h4>
                     <p className="text-white font-semibold text-base mt-0.5">Soyo, Angola</p>
-                    <p className="text-slate-300 text-xs mt-0.5">Rua Direita da Base do Kwanda</p>
+                    <p className="text-slate-300 text-xs mt-0.5">Polo Industrial do Soyo, Província do Zaire</p>
                   </div>
                 </div>
 

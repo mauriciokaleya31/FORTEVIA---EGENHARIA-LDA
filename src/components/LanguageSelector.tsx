@@ -26,7 +26,12 @@ declare global {
   }
 }
 
-export const LanguageSelector: React.FC<{ className?: string }> = ({ className = '' }) => {
+interface LanguageSelectorProps {
+  className?: string;
+  theme?: 'dark' | 'light';
+}
+
+export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = '', theme = 'light' }) => {
   const [currentLang, setCurrentLang] = useState<SupportedLanguage>('pt');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -97,7 +102,11 @@ export const LanguageSelector: React.FC<{ className?: string }> = ({ className =
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-white text-xs font-heading font-medium border border-slate-700 hover:border-[#BB7636] transition-all shadow-sm"
+        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-heading font-semibold border transition-all shadow-sm ${
+          theme === 'dark'
+            ? 'bg-slate-800/90 hover:bg-slate-700 text-white border-slate-700 hover:border-[#BB7636]'
+            : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-300 hover:border-[#BB7636]'
+        }`}
         title="Traductor / Idioma"
       >
         <Globe className="w-3.5 h-3.5 text-[#BB7636]" />
@@ -107,8 +116,8 @@ export const LanguageSelector: React.FC<{ className?: string }> = ({ className =
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-1.5 w-48 rounded-xl bg-[#081B4B] border border-slate-700 shadow-2xl py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
-          <div className="px-3 py-1 border-b border-slate-800 text-[10px] font-heading font-bold text-slate-400 uppercase tracking-wider">
+        <div className="absolute right-0 mt-1.5 w-48 rounded-xl bg-white border border-slate-200 shadow-2xl py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
+          <div className="px-3 py-1 border-b border-slate-100 text-[10px] font-heading font-bold text-slate-400 uppercase tracking-wider">
             Seleccione o Idioma
           </div>
           {LANGUAGES.map((lang) => {
@@ -118,7 +127,9 @@ export const LanguageSelector: React.FC<{ className?: string }> = ({ className =
                 key={lang.code}
                 onClick={() => changeLanguage(lang.code)}
                 className={`w-full text-left px-3 py-2 text-xs font-heading flex items-center justify-between transition-colors ${
-                  isSelected ? 'bg-[#BB7636] text-white font-bold' : 'text-slate-200 hover:bg-slate-800/80 hover:text-white'
+                  isSelected 
+                    ? 'bg-[#BB7636] text-white font-bold' 
+                    : 'text-slate-700 hover:bg-slate-50 hover:text-[#081B4B]'
                 }`}
               >
                 <div className="flex items-center gap-2">

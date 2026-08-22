@@ -9,23 +9,23 @@ interface HeroProps {
 
 const HERO_SLIDES = [
   {
-    image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/Apresentacao_Brochura_LIZANDO_SHIP_CHANDLING_Small-1.pdf.png',
-    fallback: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=2000&q=85',
+    image: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=2000&q=85',
+    fallback: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2000&q=85',
     title: 'Engenharia, Procurement e Logística',
     highlight: 'para um mundo em movimento.',
     subtitle: 'Soluções de engenharia especializada, serviços de aperto e torque hidráulico, manutenção e procurement directo com OEMs para operações no Soyo e offshore angolano.',
   },
   {
-    image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/Apresentacao_Brochura_LIZANDO_SHIP_CHANDLING_Small-1.pdf-1.png',
-    fallback: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2000&q=85',
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2000&q=85',
+    fallback: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=2000&q=85',
     title: 'Excelência Operacional & Suporte Técnico',
-    highlight: 'na Base do Kwanda e Offshore.',
+    highlight: 'no Soyo e Offshore.',
     subtitle: 'Equipa 100% angolana altamente qualificada para manutenções mecânicas, calibrações de instrumentação SCADA, bombas, compressores e tubagens industriais.',
   },
   {
-    image: 'https://visa.onlyvibes.online/wp-content/uploads/2026/08/Apresentacao_Brochura_LIZANDO_SHIP_CHANDLING_Small-1.pdf-2.png',
-    fallback: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=2000&q=85',
-    title: 'Fornecimento Global & Soluções LIZANDO',
+    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=2000&q=85',
+    fallback: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=2000&q=85',
+    title: 'Fornecimento Global & Soluções Industriais',
     highlight: 'com Rigor e Pontualidade.',
     subtitle: 'Gestão completa da cadeia de abastecimento, equipamentos hidráulicos Enerpac e Hi-Force, ferramentas e insumos industriais sob conformidade de Incoterms.',
   },
@@ -54,13 +54,13 @@ export const Hero: React.FC<HeroProps> = ({ setActivePage, onOpenContactModal })
   return (
     <section className="relative bg-[#081B4B] text-white overflow-hidden py-10 sm:py-20 lg:py-28 min-h-[500px] sm:min-h-[620px] flex items-center">
       
-      {/* Background Image Slider with Overlays */}
-      <div className="absolute inset-0 z-0">
+      {/* Background Image Slider with Transparent Gradient Overlays */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {HERO_SLIDES.map((slide, index) => (
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? 'opacity-40 scale-100' : 'opacity-0 scale-105 pointer-events-none'
+              index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
             }`}
           >
             <img
@@ -72,14 +72,14 @@ export const Hero: React.FC<HeroProps> = ({ setActivePage, onOpenContactModal })
                   target.src = slide.fallback;
                 }
               }}
-              className="w-full h-full object-cover object-center transition-transform duration-1000"
+              className="w-full h-full object-cover object-center transition-transform duration-1000 brightness-90 contrast-105"
             />
           </div>
         ))}
 
-        {/* Dark Navy & Gold Radial Gradient Overlay for maximum readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#081B4B] via-[#081B4B]/95 to-[#081B4B]/80" />
-        <div className="absolute inset-0 bg-grid-pattern-dark opacity-20" />
+        {/* Soft, Transparent Gradient Overlay allowing background image to be clearly visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#081B4B]/85 via-[#081B4B]/55 to-black/35" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#081B4B]/90 via-transparent to-[#081B4B]/40" />
       </div>
 
       {/* Slider Navigation Arrows - Desktop & Mobile Friendly */}
@@ -120,15 +120,15 @@ export const Hero: React.FC<HeroProps> = ({ setActivePage, onOpenContactModal })
           <div className="lg:col-span-12 max-w-4xl space-y-4 sm:space-y-6 animate-in fade-in duration-500">
             
             {/* Headline */}
-            <h1 className="font-heading font-black text-2xl sm:text-4xl lg:text-6xl leading-tight text-white tracking-tight">
+            <h1 className="font-heading font-black text-2xl sm:text-4xl lg:text-6xl leading-tight text-white tracking-tight drop-shadow-lg">
               {activeSlideData.title}{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BB7636] via-amber-400 to-[#BB7636]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BB7636] via-amber-300 to-amber-500 drop-shadow-md">
                 {activeSlideData.highlight}
               </span>
             </h1>
 
             {/* Subtext */}
-            <p className="text-slate-300 text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-2xl">
+            <p className="text-slate-100 text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-2xl drop-shadow-md bg-black/25 backdrop-blur-[2px] p-3.5 sm:p-4 rounded-xl border border-white/10">
               {activeSlideData.subtitle}
             </p>
 

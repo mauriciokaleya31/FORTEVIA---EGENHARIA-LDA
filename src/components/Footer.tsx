@@ -103,7 +103,7 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, onOpenContactModa
                 <MapPin className="w-4 h-4 text-[#BB7636] flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-white">Soyo, Angola</p>
-                  <p className="text-slate-400">Rua Direita da Base do Kwanda</p>
+                  <p className="text-slate-400">Província do Zaire, Soyo</p>
                 </div>
               </div>
 

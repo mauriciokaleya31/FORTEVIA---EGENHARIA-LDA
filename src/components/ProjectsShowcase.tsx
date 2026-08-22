@@ -34,7 +34,7 @@ export const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({ onOpenContac
             Galeria de Projectos Fortevia
           </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Registo fotográfico das nossas intervenções operacionais, fornecimentos técnicos e actuação em campo no Soyo, Base do Kwanda e plataformas offshore em Angola.
+            Registo fotográfico das nossas intervenções operacionais, fornecimentos técnicos e actuação em campo no Soyo e plataformas offshore em Angola.
           </p>
         </div>
 
@@ -50,7 +50,16 @@ export const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({ onOpenContac
               <img
                 src={proj.image}
                 alt={`Galeria Fortevia ${idx + 1}`}
+                onError={(e) => {
+                  if (proj.fallbackImage) {
+                    const target = e.currentTarget;
+                    if (target.src !== proj.fallbackImage) {
+                      target.src = proj.fallbackImage;
+                    }
+                  }
+                }}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
               />
 
               {/* Subtle hover overlay with expand icon */}
@@ -70,7 +79,7 @@ export const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({ onOpenContac
               Necessita de Serviços e Engenharia para o seu Projecto?
             </h4>
             <p className="text-slate-300 text-xs sm:text-sm">
-              Solicite a nossa equipa para mobilizações no Soyo, Base do Kwanda ou offshore.
+              Solicite a nossa equipa para mobilizações no Soyo, onshore ou offshore.
             </p>
           </div>
 
@@ -127,6 +136,15 @@ export const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({ onOpenContac
               <img
                 src={PROJECTS_DATA[activeImageIndex].image}
                 alt={PROJECTS_DATA[activeImageIndex].title}
+                onError={(e) => {
+                  const fallback = PROJECTS_DATA[activeImageIndex].fallbackImage;
+                  if (fallback) {
+                    const target = e.currentTarget;
+                    if (target.src !== fallback) {
+                      target.src = fallback;
+                    }
+                  }
+                }}
                 className="max-w-full max-h-[70vh] object-contain"
               />
             </div>

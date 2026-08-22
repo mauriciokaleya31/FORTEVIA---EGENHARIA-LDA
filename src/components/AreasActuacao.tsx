@@ -43,7 +43,7 @@ export const AreasActuacao: React.FC<AreasActuacaoProps> = ({ setActivePage }) =
       image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
       icon: Truck,
       points: [
-        'Mobilização rápida para a Base do Kwanda no Soyo',
+        'Mobilização rápida para operações no Soyo e Offshore',
         'Fretes Marítimos, Aéreos e Terrestres com suporte aduaneiro',
         'Controlo integral do ciclo de fornecimento EXW a DDP',
         'Armazenamento seguro e gestão de inventários'

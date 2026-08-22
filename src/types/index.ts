@@ -41,7 +41,19 @@ export interface ProjectItem {
   location: string;
   description: string;
   image: string;
+  fallbackImage?: string;
   highlights: string[];
+}
+
+export interface ClientItem {
+  id: string;
+  name: string;
+  fullName: string;
+  category: string;
+  description: string;
+  scope: string;
+  tag: string;
+  badgeColor?: string;
 }
 
 export interface QuoteCartItem {

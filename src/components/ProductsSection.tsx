@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
 import { PRODUCTS_DATA } from '../data/forteviaData';
-import { ProductItem } from '../types';
+import { ProductItem, PageRoute } from '../types';
 import { 
   Wrench, Sliders, Settings, Activity, Layers, Zap, Shield, Cpu, 
   Droplet, ShieldAlert, Anchor, AlertTriangle, Package, Lock, 
   Search, CheckCircle, Tag, ShoppingBag, Eye, X, Mail, Phone, ExternalLink,
-  Info, Sparkles, Filter, Check
+  Info, Sparkles, Filter, Check, ChevronLeft, ChevronRight, ArrowRight, Layers as LayersIcon
 } from 'lucide-react';
 
 interface ProductsSectionProps {
   onOpenQuoteModal: (itemName?: string) => void;
   onOpenContactModal: () => void;
+  setActivePage?: (page: PageRoute) => void;
+  isHomeView?: boolean;
 }
 
 export const ProductsSection: React.FC<ProductsSectionProps> = ({
   onOpenQuoteModal,
   onOpenContactModal,
+  setActivePage,
+  isHomeView = false,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [activeProductModal, setActiveProductModal] = useState<ProductItem | null>(null);
   const [cartItems, setCartItems] = useState<string[]>([]);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const categories = [
     { id: 'all', label: 'Todos os Produtos' },
@@ -41,6 +46,22 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
       (p.brand && p.brand.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
+
+  // For slider mode (Home View), calculate chunk of products
+  const itemsPerSlide = 4;
+  const maxSlideIndex = Math.max(0, Math.ceil(filteredProducts.length / itemsPerSlide) - 1);
+
+  const handlePrevSlide = () => {
+    setCurrentSlideIndex((prev) => (prev > 0 ? prev - 1 : maxSlideIndex));
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlideIndex((prev) => (prev < maxSlideIndex ? prev + 1 : 0));
+  };
+
+  const displayedHomeProducts = isHomeView 
+    ? filteredProducts.slice(currentSlideIndex * itemsPerSlide, (currentSlideIndex + 1) * itemsPerSlide)
+    : filteredProducts;
 
   const toggleCartItem = (productName: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -78,56 +99,99 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
   };
 
   return (
-    <section className="py-16 md:py-24 bg-slate-50 text-slate-800" id="products-section">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section className="py-16 md:py-24 bg-slate-50 text-slate-800 relative overflow-hidden" id="products-section">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         
-
-
-        {/* Filter Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200 shadow-sm">
-          {/* Search Bar */}
-          <div className="relative w-full md:w-80">
-            <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Procurar por nome, marca ou categoria..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-[#BB7636] focus:ring-1 focus:ring-[#BB7636]"
-            />
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14 space-y-3">
+          <div className="inline-flex items-center gap-2 bg-[#081B4B]/5 border border-[#081B4B]/10 px-3.5 py-1.5 rounded-full text-xs font-heading font-bold text-[#081B4B] uppercase tracking-wider">
+            <Package className="w-3.5 h-3.5 text-[#BB7636]" />
+            <span>Fornecimento & Procurement Internacional</span>
           </div>
 
-          {/* Category Tabs & Cart Button */}
-          <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <h2 className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#081B4B] tracking-tight">
+            Nossos Produtos
+          </h2>
+
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Equipamentos industriais certificados, sistemas hidráulicos de alta pressão e insumos especializados com garantia de procedência e suporte técnico no Soyo.
+          </p>
+        </div>
+
+        {/* Filter / Category Controls */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200 shadow-sm">
+          {/* Search Bar (Shown in full page view or on search focus) */}
+          {!isHomeView && (
+            <div className="relative w-full md:w-80">
+              <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Procurar por nome, marca ou categoria..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-[#BB7636] focus:ring-1 focus:ring-[#BB7636]"
+              />
+            </div>
+          )}
+
+          {/* Category Tabs & Slider Controls */}
+          <div className={`flex items-center gap-2 w-full ${isHomeView ? 'justify-between' : 'md:w-auto'} overflow-x-auto pb-1 md:pb-0 scrollbar-none`}>
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-none py-1">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => {
+                    setSelectedCategory(cat.id);
+                    setCurrentSlideIndex(0);
+                  }}
+                  className={`px-3.5 py-2 rounded-xl font-heading text-xs font-semibold whitespace-nowrap transition-all flex-shrink-0 ${
+                    selectedCategory === cat.id
+                      ? 'bg-[#081B4B] text-white shadow'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
             {cartItems.length > 0 && (
               <button
                 onClick={handleBatchQuote}
-                className="bg-[#BB7636] hover:bg-[#a5652a] text-white px-4 py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-md flex-shrink-0"
+                className="bg-[#BB7636] hover:bg-[#a5652a] text-white px-4 py-2 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-md flex-shrink-0 ml-2"
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span>Cotação ({cartItems.length})</span>
               </button>
             )}
-
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-2.5 rounded-xl font-heading text-xs font-semibold whitespace-nowrap transition-all flex-shrink-0 ${
-                  selectedCategory === cat.id
-                    ? 'bg-[#081B4B] text-white shadow'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
           </div>
+
+          {/* Slider Arrows when in Home view */}
+          {isHomeView && maxSlideIndex > 0 && (
+            <div className="hidden sm:flex items-center gap-2 flex-shrink-0 pl-2">
+              <button
+                onClick={handlePrevSlide}
+                className="p-2.5 rounded-xl bg-slate-100 hover:bg-[#081B4B] text-slate-700 hover:text-white border border-slate-200 transition-colors shadow-sm"
+                aria-label="Slide Anterior"
+                title="Slide Anterior"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleNextSlide}
+                className="p-2.5 rounded-xl bg-[#081B4B] hover:bg-[#BB7636] text-white border border-[#081B4B] transition-colors shadow-sm"
+                aria-label="Próximo Slide"
+                title="Próximo Slide"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* Products Grid */}
+        {/* Products Grid or Slider View */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-          {filteredProducts.map((product) => {
+          {displayedHomeProducts.map((product) => {
             const IconComp = getIcon(product.iconName);
             const isInCart = cartItems.includes(product.name);
 
@@ -216,7 +280,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                       {isInCart ? (
                         <>
                           <Check className="w-3.5 h-3.5 text-emerald-600" />
-                          <span>Adicionado à Lista de Cotação</span>
+                          <span>Adicionado à Lista</span>
                         </>
                       ) : (
                         <>
@@ -231,6 +295,45 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
             );
           })}
         </div>
+
+        {/* Slider Controls for Mobile & Slide Dots if in Home View */}
+        {isHomeView && maxSlideIndex > 0 && (
+          <div className="flex sm:hidden items-center justify-between mt-6 px-2">
+            <button
+              onClick={handlePrevSlide}
+              className="px-4 py-2 rounded-lg bg-white border border-slate-300 text-slate-700 text-xs font-bold flex items-center gap-1"
+            >
+              <ChevronLeft className="w-4 h-4" /> Anterior
+            </button>
+            <span className="text-xs text-slate-500 font-heading">
+              {currentSlideIndex + 1} de {maxSlideIndex + 1}
+            </span>
+            <button
+              onClick={handleNextSlide}
+              className="px-4 py-2 rounded-lg bg-[#081B4B] text-white text-xs font-bold flex items-center gap-1"
+            >
+              Próximo <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+        {/* Bottom CTA Button: "Ver Mais Produtos" */}
+        {isHomeView && (
+          <div className="mt-12 text-center">
+            <button
+              onClick={() => {
+                if (setActivePage) {
+                  setActivePage('products');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+              className="inline-flex items-center gap-3 bg-[#081B4B] hover:bg-[#BB7636] text-white px-8 py-4 rounded-xl font-heading font-extrabold text-sm uppercase tracking-wider shadow-xl shadow-[#081B4B]/20 hover:shadow-[#BB7636]/30 transition-all border border-slate-700 hover:border-[#BB7636] hover:scale-105 active:scale-95"
+            >
+              <span>Ver Mais Produtos & Catálogo Completo</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
 
       </div>
 
@@ -345,4 +448,3 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
     </section>
   );
 };
-
